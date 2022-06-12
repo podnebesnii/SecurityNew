@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
@@ -9,13 +10,13 @@
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
         <h2>Users</h2>
-        <table>
-            <thead>
+        <table class="table table-bordered table-striped table-dark">
+            <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Age</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Age</th>
             </tr>
             </thead>
             <tbody>

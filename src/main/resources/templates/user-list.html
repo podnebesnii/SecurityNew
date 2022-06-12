@@ -25,13 +25,13 @@
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.surname}"></td>
                 <td th:text="${user.age}"></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{user-update/{id}(id=${user.id})}" role="button">Edit</a></td>
+                <td><a class="btn btn-primary" th:href="@{user-delete/{id}(id=${user.id})}" role="button">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/user-create">Create user</a></p>
+    <p><a class="btn btn-primary" href="/user-create" role="button">Create user</a></p>
 </div>
 </body>
 </html>

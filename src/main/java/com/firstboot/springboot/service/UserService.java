@@ -9,7 +9,7 @@ public interface UserService {
 
     public List<User> findAll();
 
-    public User saveUser(User user);
+    public boolean saveUser(User user);
 
     public void deleteById(Integer id);
 }

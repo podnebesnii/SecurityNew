@@ -27,13 +27,15 @@
                 <td th:text="${user.lastname}"></td>
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.email}"></td>
-                <td><a class="btn btn-primary" th:href="@{user-update/{id}(id=${user.id})}" role="button">Edit</a></td>
-                <td><a class="btn btn-primary" th:href="@{user-delete/{id}(id=${user.id})}" role="button">Delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{/admin/user-update/{id}(id=${user.id})}" role="button">Edit</a></td>
+                <td><a class="btn btn-primary" th:href="@{/admin/user-delete/{id}(id=${user.id})}" role="button">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a class="btn btn-primary" href="/user-create" role="button">Create user</a></p>
+    <p><a class="btn btn-primary" href="/admin/user-create" role="button">Create user</a></p>
+    <a th:href="@{/logout}">Logout</a>
+
 </div>
 </body>
 </html>

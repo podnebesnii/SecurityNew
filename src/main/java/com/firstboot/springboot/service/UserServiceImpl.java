@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
 
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public boolean saveUser(User user) {
         userRepository.save(user);
         return true;    }

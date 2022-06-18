@@ -1,8 +1,10 @@
 package com.firstboot.springboot.controller;
 
+import com.firstboot.springboot.model.Role;
 import com.firstboot.springboot.model.User;
+import com.firstboot.springboot.repository.RoleRepository;
+import com.firstboot.springboot.repository.UserRepository;
 import com.firstboot.springboot.service.UserService;
-import com.firstboot.springboot.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,22 +12,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userService = userServiceImpl;
+    public UserController(UserService userService, UserRepository userRepository, RoleRepository roleRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
 
     @GetMapping("/user")
     public String showUserInfo(Model model) {
@@ -37,8 +41,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String findAll(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.findAll());
         return "user-list";
     }
 
@@ -49,19 +52,23 @@ public class UserController {
         return "user-update";
     }
 
-    @PostMapping("/admin/user-update")
-    public String updateUser(User user) {
+    @PostMapping("/admin/{id}")
+    public String updateUser(User user, @PathVariable int id, @RequestParam(value = "role") String[] roles) {
+        user.setRoles(getRoles(roles));
         userService.saveUser(user);
         return "redirect:/admin/";
     }
 
     @GetMapping("/admin/user-create")
-    public String createUserForm(User user) {
+    public String createUserForm(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("role", new ArrayList<Role>());
         return "user-create";
     }
 
     @PostMapping("/admin/user-create")
-    public String createUser(User user) {
+    public String createUser (@ModelAttribute("user") User user, @RequestParam(value = "role") String[] roles) {
+        user.setRoles(getRoles(roles));
         userService.saveUser(user);
         return "redirect:/admin/";
     }
@@ -70,5 +77,12 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteById(id);
         return "redirect:/admin/";
+    }
+    public Set<Role> getRoles(String[] roles) {
+        Set<Role> roleSet = new HashSet<>();
+        for (String role : roles) {
+            roleSet.add(roleRepository.findByName(role));
+        }
+        return roleSet;
     }
 }

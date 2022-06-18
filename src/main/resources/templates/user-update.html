@@ -3,10 +3,10 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>Create user</title>
+<title>Update user</title>
 </head>
 <body>
-<form action="#" th:action="@{/admin/user-update}" th:object="${user}" method="post">
+<form th:method="PATCH" th:action="@{'/admin/' + ${user.id}}" th:object="${user}">
     <label for="id">ID</label>
     <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
     <br/>
@@ -24,6 +24,15 @@
     <br/>
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password" placeholder="Password">
+    <br/>
+    <br/>
+    <label>
+        <select size="3" name="role" id="roles" multiple="multiple">
+            <option disabled>Roles:</option>
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option selected value="ROLE_USER">USER</option>
+        </select>
+    </label>
     <br/>
     <input type="submit" value="Update User">
     <a th:href="@{/logout}">Logout</a>

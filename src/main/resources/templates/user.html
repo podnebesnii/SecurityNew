@@ -24,6 +24,7 @@
         <td th:utext="${user.age}">...</td>
         <td th:utext="${user.email}">...</td>
         <td th:utext="${user.password}">...</td>
+        <td th:text="${#strings.setJoin(user.getAuthorities, ',')}">...</td>
     </tr>
 </table>
 <br>

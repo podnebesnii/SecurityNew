@@ -6,7 +6,6 @@ import com.firstboot.springboot.repository.RoleRepository;
 import com.firstboot.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,8 +35,8 @@ public class UserService implements UserDetailsService {
         this.roleRepository = roleRepository;
     }
 
-    public User findById(Integer id) {
-        return userRepository.findById(id).orElse(null);
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
     }
 
     public List<User> findAll() {

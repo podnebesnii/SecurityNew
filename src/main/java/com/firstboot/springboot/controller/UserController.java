@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -31,6 +28,13 @@ public class UserController {
     }
 
 
+    @RequestMapping("/getOne")
+    @ResponseBody
+    public Optional<User> getOne(Integer id)
+    {
+        return userService.findById(id);
+    }
+
     @GetMapping("/user")
     public String showUserInfo(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -42,18 +46,14 @@ public class UserController {
     @GetMapping("/admin")
     public String findAll(Model model) {
         model.addAttribute("users", userService.findAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByEmail(auth.getName());
+        model.addAttribute("user",user);
         return "user-list";
     }
 
-    @GetMapping("/admin/user-update/{id}")
-    public String updateUserForm(@PathVariable("id") int id, Model model) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "user-update";
-    }
-
-    @PostMapping("/admin/{id}")
-    public String updateUser(User user, @PathVariable int id, @RequestParam(value = "role") String[] roles) {
+    @RequestMapping(value="/admin/update",method = {RequestMethod.POST, RequestMethod.GET})
+    public String update(User user,@RequestParam(value = "role") String[] roles){
         user.setRoles(getRoles(roles));
         userService.saveUser(user);
         return "redirect:/admin/";
@@ -61,6 +61,9 @@ public class UserController {
 
     @GetMapping("/admin/user-create")
     public String createUserForm(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByEmail(auth.getName());
+        model.addAttribute("oldUser", user);
         model.addAttribute("user", new User());
         model.addAttribute("role", new ArrayList<Role>());
         return "user-create";

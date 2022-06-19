@@ -1,31 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Create user</title>
 </head>
 <body>
-<form action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
-    <label for="name">First Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="First Name">
-    <label for="lastname">Last Name</label>
-    <input type="text" th:field="*{lastname}" id="lastname" placeholder="Last Name">
-    <label for="age">Age</label>
-    <input type="text" th:field="*{age}" id="age" placeholder="Age">
-    <label for="email">Email</label>
-    <input type="text" th:field="*{email}" id="email" placeholder="Email">
-    <label for="password">Password</label>
-    <input type="text" th:field="*{password}" id="password" placeholder="Password">
-    <label>
-        <select size="3" name="role" id="roles" multiple="multiple">
-            <option disabled>Roles:</option>
-            <option value="ROLE_ADMIN">ADMIN</option>
-            <option selected value="ROLE_USER">USER</option>
-        </select>
-    </label>
-    <input type="submit" value="Create User">
-    <a th:href="@{/logout}">Logout</a>
-</form>
+<nav class="navbar navbar-expand-xl navbar-dark text-white bg-dark">
+
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse show" id="navbarDark">
+            <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                <span class="align-middle font-weight-bold mr-1" th:text="${oldUser.email}"></span></b>
+                <span class="align-middle mr-1">with roles:</span>
+                <span class="align-middle" th:text="${oldUser.getRole}">
+                </span>
+            </ul>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+        </form>
+
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="p-0 col-2">
+            <div class="nav flex-column nav-pills pt-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')"
+                   aria-controls="v-pills-home" aria-selected="false">Admin</a>
+                <a class="nav-link active" href="/user" sec:authorize="(hasAnyRole('ROLE_USER','ROLE_ADMIN'))"
+                   role="tab"
+                   aria-controls="v-pills-profile" aria-selected="true">User</a>
+            </div>
+        </div>
+    </div>
+    <div th:switch="${users}">
+        <h2>Admin panel</h2>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="/admin/">Users table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/user-create">New user</a>
+            </li>
+        </ul>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <h4>Add new User</h4>
+            </tr>
+            </thead>
+
+            <tr>
+                <div class="col-md bg-black border">
+
+                    <form align="center" class="offset-md-4 col-md-3 mt-4 mb-4" th:align="center"
+                          action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="name"><b>First Name</b></label>
+                                <input type="text" th:field="*{name}" id="name" class="form-control"
+                                       placeholder="First Name">
+                                <label for="lastname"><b>Last Name</b></label>
+                                <input type="text" th:field="*{lastname}" class="form-control" id="lastname"
+                                       placeholder="Last Name">
+                                <label for="age"><b>Age</b></label>
+                                <input type="text" th:field="*{age}" class="form-control" id="age" placeholder="Age">
+                                <label for="email"><b>Email</b></label>
+                                <input type="text" th:field="*{email}" class="form-control" id="email"
+                                       placeholder="Email">
+                                <label for="password"><b>Password</b></label>
+                                <input type="text" th:field="*{password}" class="form-control" id="password"
+                                       placeholder="Password">
+                                <label for="roles"><b>Roles</b></label>
+                                <select multiple class="form-control form-control-sm" id="roles" name="role"
+                                        size="2" required>
+                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                    <option value="ROLE_USER" selected>USER</option>
+                                </select>
+                                <button th:type="submit" class="btn btn-success" value="Add new user">
+                                    Add new user
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -14,8 +14,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+
 
     public Role(String name) {
         this.name = name;
@@ -29,4 +28,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+
 }

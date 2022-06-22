@@ -1,18 +1,18 @@
 package com.firstboot.springboot.service;
 
 import com.firstboot.springboot.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
-    Optional<User> findById(Integer id);
 
     List<User> findAll();
 
-    User findByEmail(String email);
+    User findUserById(long id);
 
-    boolean saveUser(User user);
+    void saveAndFlush(User user);
 
-    void deleteById(Integer id);
+    void deleteById(long id);
+
 }

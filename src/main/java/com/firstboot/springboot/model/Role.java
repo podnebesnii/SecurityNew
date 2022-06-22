@@ -1,27 +1,36 @@
 package com.firstboot.springboot.model;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
-@Data
-@Table(name = "role")
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Role implements GrantedAuthority {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
 
-
-    public Role(long roleAdmin, String name) {
+    public Role(String name) {
         this.name = name;
     }
 
-    public Role() {
-
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String name;
+
 
     @Override
     public String getAuthority() {

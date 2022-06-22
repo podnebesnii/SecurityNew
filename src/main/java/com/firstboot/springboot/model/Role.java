@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -16,7 +15,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
 
-    public Role(String name) {
+    public Role(long roleAdmin, String name) {
         this.name = name;
     }
 

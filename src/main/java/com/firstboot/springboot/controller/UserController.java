@@ -4,7 +4,7 @@ import com.firstboot.springboot.model.Role;
 import com.firstboot.springboot.model.User;
 import com.firstboot.springboot.repository.RoleRepository;
 import com.firstboot.springboot.repository.UserRepository;
-import com.firstboot.springboot.service.UserService;
+import com.firstboot.springboot.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +16,12 @@ import java.util.*;
 
 @Controller
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService userService, UserRepository userRepository, RoleRepository roleRepository) {
+    public UserController(UserServiceImpl userService, UserRepository userRepository, RoleRepository roleRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;

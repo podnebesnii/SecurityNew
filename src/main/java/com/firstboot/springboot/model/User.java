@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
-    @Min(value = 0)
+    @PersonAgeConstraint
     private int age;
     private String password;
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

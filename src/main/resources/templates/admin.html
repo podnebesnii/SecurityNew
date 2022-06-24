@@ -57,85 +57,91 @@
                 </h2>
             </div>
             <!--Панель навигации-->
-
-            <ul class="nav nav-tabs">
-
-                <li class="nav-item">
-                    <a class="nav-link active">Users table</a>
-                </li>
-                <li class="nav-item" id="newUserLink">
-
-                </li>
-
-                <li class="nav nav-item" id="formNewUser">
-
-                    <a class="nav-link" type="button" id="SliderNewUserForm">New user</a>
-                    <div class="col-md-10" style="align-items: center">
-                        <div class="container-fluid" align="center">
-                            <div class="d-flex justify-content-center">
-                                <div class="form-group">
-                                    <form id="defaultSomeForm" data-hidden=true style="display: none">
-                                        <h4>Add new User</h4>
-                                        <input id="AddNewUserFirstName" type="text" placeholder="FirstName">
-                                        <input id="AddNewUserLastName" type="text" placeholder="LastName">
-                                        <input class="form-control" id="AddNewUserAge" type="number" placeholder="age">
-                                        <input class="form-control" id="AddNewUserUsername" type="text"
-                                               placeholder="Email">
-                                        <input class="form-control" id="AddNewUserPassword" type="password"
-                                               placeholder="password">
-                                        <select class="custom-select"
-                                                size="3"
-                                                multiple name="roles"
-                                                id="AddNewUserRoles" required>
-                                            <option value="ROLE_ADMIN">ADMIN</option>
-                                            <option value="ROLE_USER">USER</option>
-                                        </select>
-                                        <br>
-
-                                        <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new
-                                            user
-                                        </button>
-                                    </form>
-
-                                </div>
+            <div class="container-fluid">
+                <nav>
+                    <div class="nav nav-tabs border-bottom-0" id="nav-tab" role="tablist">
+                        <a class="nav-link active" id="nav-users_table-link" data-toggle="tab" href="#nav-users_table"
+                           role="tab" aria-controls="nav-users_table">Users table</a>
+                        <a class="nav-link" id="nav-user_form-link" data-toggle="tab" href="#nav-user_form"
+                           role="tab" aria-controls="nav-user_form">New user</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-users_table" role="tabpanel">
+                        <div class="row border bg-white pb-2">
+                            <div>
+                                <h5 style="margin: 10px">
+                                    All users
+                                </h5>
 
                             </div>
+                            <!--Таблица-->
+                            <table class="table table-hover" style="background-color: white" id="tableUsers">
+                                <!--Шапка таблицы-->
+                                <thead>
+
+                                <tr>
+                                    <th style="text-align: center;"> ID</th>
+                                    <th style="text-align: center;"> First Name</th>
+                                    <th style="text-align: center;"> Last Name</th>
+                                    <th style="text-align: center;"> Age</th>
+                                    <th style="text-align: center;"> Email</th>
+                                    <th style="text-align: center;"> Role</th>
+                                    <th style="text-align: center;"> Edit</th>
+                                    <th style="text-align: center;"> Delete</th>
+                                </tr>
+                                </thead>
+                                <!--Тело таблицы-->
+
+                                <tbody id="data">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </li>
+                    <div class="tab-pane fade" id="nav-user_form" role="tabpanel">
+                        <div class="row border bg-white pb-2">
+                            <h5 style="margin: 10px">Add new User</h5>
+                        </div>
+                            <div class="container col-4 form-group text-center">
+                                <form role="form" id="defaultSomeForm">
+                            <strong><label>First name</label></strong>
+                            <input class="form-control" id="AddNewUserFirstName" type="text"
+                                   placeholder="FirstName">
+                            <strong><label>Last name</label></strong>
+                            <input class="form-control" id="AddNewUserLastName" type="text"
+                                   placeholder="LastName">
+                            <strong><label>Age</label></strong>
+                            <input class="form-control" id="AddNewUserAge" type="number"
+                                   placeholder="age">
+                            <strong><label>Email</label></strong>
+                            <input class="form-control" id="AddNewUserUsername" type="text"
+                                   placeholder="Email">
+                            <strong><label>Password</label></strong>
+                            <input class="form-control" id="AddNewUserPassword"
+                                   type="password"
+                                   placeholder="password">
+                            <strong><label>Role</label></strong>
+                            <select class="custom-select"
+                                    size="3"
+                                    multiple name="roles"
+                                    id="AddNewUserRoles" required>
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                                <option value="ROLE_USER">USER</option>
+                            </select>
+                            <br>
 
-            </ul>
-
-            <!--            Заголовок таблицы-->
-            <div>
-                <h5 style="margin: 10px">
-                    All users
-                </h5>
-
+                            <button class="btn btn-primary mb-2" type="button"
+                                    id="addNewUserButton">Add new
+                                user
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--Таблица-->
-            <table class="table table-hover" style="background-color: white" id="tableUsers">
-                <!--Шапка таблицы-->
-                <thead>
-
-                <tr>
-                    <th style="text-align: center;"> ID</th>
-                    <th style="text-align: center;"> First Name</th>
-                    <th style="text-align: center;"> Last Name</th>
-                    <th style="text-align: center;"> Age</th>
-                    <th style="text-align: center;"> Email</th>
-                    <th style="text-align: center;"> Role</th>
-                    <th style="text-align: center;"> Edit</th>
-                    <th style="text-align: center;"> Delete</th>
-                </tr>
-                </thead>
-                <!--Тело таблицы-->
-
-                <tbody id="data">
-
-                </tbody>
-            </table>
         </div>
+        </li>
     </div>
 </div>
 

@@ -5,6 +5,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,6 +20,8 @@ public class User implements UserDetails {
     private String name;
     private String firstName;
     private String lastName;
+
+    @Min(value = 0)
     private int age;
     private String password;
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

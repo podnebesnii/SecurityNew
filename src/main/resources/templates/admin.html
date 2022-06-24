@@ -112,7 +112,7 @@
                             <input class="form-control" id="AddNewUserLastName" type="text"
                                    placeholder="LastName">
                             <strong><label>Age</label></strong>
-                            <input class="form-control" id="AddNewUserAge" type="number"
+                            <input class="form-control" id="AddNewUserAge" type="number" min="0" oninput="validity.valid||(value='')"
                                    placeholder="age">
                             <strong><label>Email</label></strong>
                             <input class="form-control" id="AddNewUserUsername" type="text"

@@ -112,7 +112,7 @@ async function editUser(modal, id) {
                 <strong><labelfor="lastName">Last Name</label></strong>
                 <input class="form-control" type="text" id="lastName" value="${user.lastName}"><br>
                 <strong><labelfor="age">Age</label></strong>
-                <input class="form-control" id="age" type="number" value="${user.age}"> <br>
+                <input class="form-control" id="age" type="number" min="0" oninput="validity.valid||(value='')" value="${user.age}"> <br>
                 <strong><labelfor="username">E-mail</label></strong>
                 <input class="form-control" type="text" id="username" value="${user.name}"><br>
                 <strong><labelfor="password">Password</label></strong>
